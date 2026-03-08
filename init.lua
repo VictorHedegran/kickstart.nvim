@@ -256,6 +256,11 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added via a link or github org/name. To run setup automatically, use `opts = {}`
+  {
+    'mattn/emmet-vim',
+    ft = { 'html', 'css', 'javascriptreact' },
+    init = function() vim.g.user_emmet_leader_key = '<C-e>' end,
+  },
   { 'NMAC427/guess-indent.nvim', opts = {} },
 
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
@@ -603,6 +608,8 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {},
+        html = {},
+        cssls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -616,6 +623,9 @@ require('lazy').setup({
         'lua-language-server', -- Lua Language server
         'stylua', -- Used to format Lua code
         'typescript-language-server', -- You can add other tools here that you want Mason to install
+        'html-lsp',
+        'css-lsp',
+        'prettierd',
       }
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -687,6 +697,8 @@ require('lazy').setup({
         lua = { 'stylua' },
         rust = { 'rustfmt' },
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        html = { 'prettierd', 'prettier', stop_after_first = true },
+        css = { 'prettierd', 'prettier', stop_after_first = true },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
