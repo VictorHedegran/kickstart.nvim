@@ -257,6 +257,36 @@ rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added via a link or github org/name. To run setup automatically, use `opts = {}`
   {
+    'grddavies/tidal.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    opts = {},
+  },
+  {
+    'greggh/claude-code.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    config = function()
+      require('claude-code').setup {
+        -- Optional: customize the terminal window
+        window = {
+          position = 'botright', -- 'botright', 'topleft', 'vertical', 'float'
+          split_ratio = 0.3, -- height as fraction of total screen
+          enter_insert = true, -- enter insert mode when opening
+          hide_numbers = true,
+          hide_signcolumn = true,
+        },
+        -- Optional: set keymaps (defaults shown below)
+        keymaps = {
+          toggle = {
+            normal = '<leader>cc', -- toggle claude in normal mode
+            terminal = '<leader>cc', -- toggle claude in terminal mode
+          },
+        },
+      }
+    end,
+  },
+  {
     'mattn/emmet-vim',
     ft = { 'html', 'css', 'javascriptreact' },
     init = function() vim.g.user_emmet_leader_key = '<C-e>' end,
